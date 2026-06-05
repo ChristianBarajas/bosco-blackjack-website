@@ -195,4 +195,138 @@ footer h3 {
     opacity: 1;
     transform: translateY(0);
   }
+
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-radius: 14px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.promoVideo {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+@media (max-width: 700px) {
+  .gallery,
+  .videoGrid {
+    grid-template-columns: 1fr;
+  }
+}
+.mediaCard {
+  text-align: center;
+}
+
+.mediaViewer {
+  position: relative;
+  max-width: 680px;
+  height: 420px;
+  margin: 24px auto 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: #050505;
+}
+
+.mediaItem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mediaArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  background: rgba(212, 175, 55, 0.9);
+}
+
+.leftArrow {
+  left: 14px;
+}
+
+.rightArrow {
+  right: 14px;
+}
+
+.mediaCounter {
+  color: #bbbbbb;
+  margin-top: 12px;
+}
+
+@media (max-width: 700px) {
+  .mediaViewer {
+    height: 320px;
+  }
+
+  .mediaArrow {
+    width: 38px;
+    height: 38px;
+  }
+}
+h1 span {
+  background: linear-gradient(
+    90deg,
+    #b8860b,
+    #f7dc7a,
+    #ffffff,
+    #d4af37,
+    #b8860b
+  );
+  background-size: 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: goldShimmer 4s linear infinite, titleGlow 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes goldShimmer {
+  0% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 300%;
+  }
+}
+
+@keyframes titleGlow {
+  from {
+    text-shadow: 0 0 18px rgba(212, 175, 55, 0.2);
+  }
+
+  to {
+    text-shadow: 0 0 38px rgba(212, 175, 55, 0.55);
+  }
 }

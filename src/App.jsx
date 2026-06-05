@@ -14,14 +14,39 @@ function App() {
   });
 
   const [status, setStatus] = useState("");
+  const [mediaIndex, setMediaIndex] = useState(0);
+
+  const mediaItems = [
+    {
+      type: "image",
+      src: "/bosco-dealer.jpeg",
+      alt: "Bosco Blackjack Dealer",
+    },
+    {
+      type: "video",
+      src: "/blackjack-action.mov",
+      alt: "Blackjack Action",
+    },
+    {
+      type: "video",
+      src: "/bosco-2.mov",
+      alt: "Bosco Blackjack Event",
+    },
+  ];
+
+  const currentMedia = mediaItems[mediaIndex];
+
+  function showPreviousMedia() {
+    setMediaIndex((prev) => (prev === 0 ? mediaItems.length - 1 : prev - 1));
+  }
+
+  function showNextMedia() {
+    setMediaIndex((prev) => (prev === mediaItems.length - 1 ? 0 : prev + 1));
+  }
 
   function handleChange(event) {
     const { name, value } = event.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
   async function handleSubmit(event) {
@@ -84,7 +109,7 @@ function App() {
       <section className="card">
         <h2>Rates</h2>
 
-        <p>2 Hour Minimum Booking</p>
+        <p className="smallText">2 Hour Minimum Booking</p>
 
         <div className="rates">
           <div>2 Hours .......... $185</div>
@@ -101,53 +126,12 @@ function App() {
         <h2>Booking Request</h2>
 
         <form onSubmit={handleSubmit}>
-          <input
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Full Name"
-            required
-          />
-
-          <input
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="Phone Number"
-            required
-          />
-
-          <input
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email Address"
-            type="email"
-          />
-
-          <input
-            name="eventDate"
-            value={formData.eventDate}
-            onChange={handleChange}
-            placeholder="Event Date"
-            required
-          />
-
-          <input
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            placeholder="Event Location"
-            required
-          />
-
-          <textarea
-            name="notes"
-            value={formData.notes}
-            onChange={handleChange}
-            placeholder="Tell us about your event..."
-          />
-
+          <input name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required />
+          <input name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" required />
+          <input name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" type="email" />
+          <input name="eventDate" value={formData.eventDate} onChange={handleChange} placeholder="Event Date" required />
+          <input name="location" value={formData.location} onChange={handleChange} placeholder="Event Location" required />
+          <textarea name="notes" value={formData.notes} onChange={handleChange} placeholder="Tell us about your event..." />
           <button type="submit">Submit Request</button>
         </form>
 
@@ -164,9 +148,33 @@ function App() {
         </a>
       </section>
 
-      <section className="card">
-        <h2>Photos & Videos</h2>
-        <p className="smallText">Event photos and videos coming soon.</p>
+      <section className="card mediaCard">
+        <h2>Event Gallery</h2>
+        <p className="smallText">
+          Real events. Real players. Real casino-night experience.
+        </p>
+
+        <div className="mediaViewer">
+          <button type="button" className="mediaArrow leftArrow" onClick={showPreviousMedia}>
+            ‹
+          </button>
+
+          {currentMedia.type === "image" ? (
+            <img className="mediaItem" src={currentMedia.src} alt={currentMedia.alt} />
+          ) : (
+            <video key={currentMedia.src} controls className="mediaItem">
+              <source src={currentMedia.src} type="video/quicktime" />
+            </video>
+          )}
+
+          <button type="button" className="mediaArrow rightArrow" onClick={showNextMedia}>
+            ›
+          </button>
+        </div>
+
+        <p className="mediaCounter">
+          {mediaIndex + 1} / {mediaItems.length}
+        </p>
       </section>
 
       <footer>
