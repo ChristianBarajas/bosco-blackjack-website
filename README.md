@@ -1,61 +1,142 @@
-# Bosco Blackjack
+<p align="center">
+  <img src="./public/favicon2.png" alt="Bosco Blackjack Logo" width="150" />
+</p>
 
-A production website built for **Bosco Blackjack**, a private blackjack entertainment service serving parties, birthdays, corporate events, casino nights, and private events throughout Southern California.
+<h1 align="center">Bosco Blackjack</h1>
 
-The project was built as a real client-facing application with a responsive React frontend, Firebase backend services, custom domain deployment, media optimization, and a Firestore-powered booking workflow.
+<p align="center">
+  <strong>Modern private casino booking experience built with React, Firebase, and serverless cloud infrastructure.</strong>
+</p>
 
-## Live Website
-
-**https://boscoblackjack.com**
+<p align="center">
+  <a href="https://boscoblackjack.com">Live Website</a>
+  ·
+  <a href="https://github.com/ChristianBarajas/bosco-blackjack-website">GitHub Repository</a>
+</p>
 
 ---
 
 ## Overview
 
-Bosco Blackjack provides an on-location blackjack experience for private events.
+**Bosco Blackjack** is a production website developed for a private blackjack entertainment business serving parties, birthdays, corporate events, casino nights, and private events throughout Southern California.
 
-The service includes:
+The project began as a simple booking landing page and evolved into a complete client-facing web application with:
 
-* Professional blackjack dealer
-* Blackjack table
-* Casino chips and cards
-* Setup and breakdown
-* Hourly event packages
-* Transportation to event locations
+* Responsive desktop and mobile design
+* Real event photo and video media
+* Cloud-based booking storage
+* Automated booking email infrastructure
+* Custom domain deployment
+* Secure serverless backend functions
+* Optimized production media
+* Modern casino-inspired animations and branding
 
-The goal of the website was to give the business a polished online presence while keeping the customer experience extremely simple:
-
-**Learn about the service → View pricing → See real event media → Submit a booking request**
+The goal was to create a website that feels like a premium private casino service while keeping the customer booking process extremely simple.
 
 ---
 
-## Core Features
+## Live Production Website
 
-### Responsive Business Website
+### https://boscoblackjack.com
 
-The interface was built using React and custom CSS with layouts designed for both desktop and mobile browsers.
+The application is hosted with Firebase Hosting and connected to a custom Namecheap domain with HTTPS/SSL enabled.
 
-The desktop experience uses a wider premium layout, while responsive breakpoints automatically reorganize content for smaller screens without creating a separate mobile application.
+---
 
-### Modern Casino UI
+## Customer Experience
 
-The visual system combines a traditional casino aesthetic with a modern high-tech interface.
+The primary customer flow is:
 
-Design elements include:
+```text
+Visit boscoblackjack.com
+        ↓
+Explore services and pricing
+        ↓
+View real event photos/videos
+        ↓
+Choose event duration
+        ↓
+Submit booking information
+        ↓
+Booking stored in Firestore
+        ↓
+Firebase Cloud Function triggered
+        ↓
+Resend email service
+        ↓
+Booking notification delivered to Bosco
+```
 
-* Black and deep-green backgrounds
+Customers never need to create an account or navigate through unnecessary pages.
+
+The entire experience is focused on moving a visitor from discovery to booking as quickly as possible.
+
+---
+
+## Features
+
+### Modern Responsive Interface
+
+The website was designed as a full desktop experience first while remaining fully responsive across tablets and mobile devices.
+
+Responsive behavior includes:
+
+* Adaptive navigation
+* Stacked mobile layouts
+* Responsive typography
+* Mobile-friendly booking controls
+* Flexible pricing cards
+* Responsive media viewer
+* Touch-friendly gallery navigation
+* Optimized spacing for different screen sizes
+
+The mobile version uses the same application rather than maintaining a separate mobile website.
+
+---
+
+## Modern Casino Design System
+
+The visual direction combines a **classic casino identity** with a **modern high-tech interface**.
+
+The design uses:
+
+* Deep black backgrounds
+* Subtle casino-green lighting
 * Metallic gold accents
-* Casino-inspired serif typography
-* Animated gold text effects
-* Floating card-suit graphics
-* Glass and bordered interface elements
-* Interactive hover states
-* Smooth navigation
-* Scroll-triggered reveal animations
-* Animated event ticker
-* Responsive pricing cards
+* Premium serif typography
+* BB + Spade branding
+* Glass-inspired interface elements
+* Animated gold text
+* Floating casino suit graphics
+* Interactive hover effects
+* Moving event ticker
+* Scroll-triggered animations
+* Modern bordered layouts
 
-The objective was to avoid an overly traditional or exaggerated Las Vegas look while still making the blackjack identity immediately recognizable.
+The intention was to avoid an exaggerated Las Vegas aesthetic and instead create something closer to a premium private casino experience.
+
+---
+
+## Scroll Animations
+
+Sections animate into view as visitors scroll through the website.
+
+The site uses the browser's `IntersectionObserver` API to detect when interface elements enter the viewport.
+
+This allows content to transition smoothly without constantly running expensive scroll calculations.
+
+Animations include:
+
+* Section reveal transitions
+* Hero image floating motion
+* Gold text movement
+* Floating card suits
+* Pricing-card hover effects
+* Button shine animations
+* Navigation underline transitions
+* Infinite event ticker
+
+The application also respects reduced-motion accessibility preferences.
 
 ---
 
@@ -63,47 +144,33 @@ The objective was to avoid an overly traditional or exaggerated Las Vegas look w
 
 Customers can submit booking requests directly through the website.
 
-The form collects:
-
-* Full name
-* Phone number
-* Email address
-* Event date
-* Number of hours requested
-* Event location
-* Additional event information
-
-Booking data is stored securely inside **Firebase Firestore**.
-
-### Booking Flow
+The booking form collects:
 
 ```text
-Customer
-   ↓
-React Booking Form
-   ↓
-Firebase Firestore
-   ↓
-bookingRequests Collection
-   ↓
-Business Booking Record
+Full Name
+Phone Number
+Email Address
+Event Date
+Hours Requested
+Event Location
+Additional Event Details
 ```
 
-Each booking submission is stored with its event information, status, and server-generated timestamp.
-
-This allows the website to function as more than a static landing page—it actively collects and persists real customer inquiries.
+React manages the form state and submits the information directly to Firebase Firestore.
 
 ---
 
-## Firebase Integration
+## Firestore Database
 
-Firebase provides the backend and production infrastructure for the project.
+Booking requests are stored in the:
 
-### Firestore
+```text
+bookingRequests
+```
 
-Firestore stores booking request data submitted through the website.
+collection.
 
-Example booking data:
+Each booking document contains:
 
 ```text
 name
@@ -117,115 +184,234 @@ status
 createdAt
 ```
 
-### Firebase Hosting
+`createdAt` uses a Firebase server timestamp so booking times are generated by the backend rather than trusting the customer's device clock.
 
-The production build is deployed through Firebase Hosting.
+---
 
-The original Firebase deployment is available through:
+## Firestore Security
 
-```text
-bosco-blackjack.web.app
-```
+The production Firestore database uses custom security rules.
 
-A custom business domain was later configured:
+Public website visitors are allowed to **create valid booking requests**, but they cannot:
 
 ```text
-boscoblackjack.com
+Read existing bookings
+Modify existing bookings
+Delete bookings
+Access unrelated Firestore data
 ```
 
-### Custom Domain & DNS
+The rules also validate the expected booking fields before accepting a new document.
 
-The custom domain was purchased through Namecheap and connected to Firebase Hosting using DNS configuration.
+This prevents customer contact information from being exposed publicly while still allowing the booking form to operate without customer accounts.
 
-The deployment process included:
+---
 
-* Custom domain ownership verification
-* A record configuration
-* TXT verification records
-* ACME certificate verification
-* SSL certificate provisioning
-* HTTPS configuration
+## Automated Booking Email System
 
-Firebase now serves the production application securely through:
+A serverless email notification system was built using:
 
-**https://boscoblackjack.com**
+```text
+Firebase Firestore
+        ↓
+Firebase Cloud Functions
+        ↓
+Firebase Secret Manager
+        ↓
+Resend
+        ↓
+Bosco Gmail
+```
+
+A second-generation Firebase Cloud Function listens for new documents created inside:
+
+```text
+bookingRequests/{bookingId}
+```
+
+When a new booking is created, the function automatically generates a formatted booking notification.
+
+The notification contains:
+
+```text
+Customer Name
+Phone Number
+Email
+Event Date
+Hours Requested
+Event Location
+Additional Event Details
+```
+
+The automated sender is configured as:
+
+```text
+Bosco Blackjack <bookings@mail.boscoblackjack.com>
+```
+
+and notifications are delivered to the business owner's existing Gmail inbox.
+
+The customer's submitted email is configured as the `Reply-To` address, allowing the business owner to press **Reply** and respond directly to the customer.
+
+---
+
+## Secure API Key Management
+
+The Resend API key is **never stored inside the React frontend or committed to GitHub**.
+
+It is stored using:
+
+**Google Cloud / Firebase Secret Manager**
+
+The Cloud Function receives access to the secret only at runtime.
+
+This prevents website visitors from extracting private email-service credentials through browser developer tools or compiled frontend JavaScript.
+
+---
+
+## Resend Domain Authentication
+
+A dedicated sending subdomain was configured:
+
+```text
+mail.boscoblackjack.com
+```
+
+DNS authentication includes:
+
+* DKIM
+* SPF TXT
+* SPF MX
+
+These records allow Resend to authenticate automated Bosco Blackjack email notifications while leaving the primary website domain and Firebase Hosting configuration intact.
 
 ---
 
 ## Media Gallery
 
-The website includes a custom event gallery containing real photos and videos from Bosco Blackjack events.
+The website contains real Bosco Blackjack event photography and video.
 
-Users can cycle through media using navigation controls rather than loading a large collection of media onto the page at once.
+Instead of displaying every media item simultaneously, the site uses a custom React carousel.
 
-Features include:
+Users can navigate through:
 
-* Image and video carousel
-* Previous/next navigation
-* Media position indicator
-* Lazy-loaded images
-* Video metadata preloading
-* Mobile responsive presentation
+* Event photography
+* Dealer photos
+* Blackjack action
+* Event videos
 
-### Video Performance Optimization
+The gallery includes:
 
-Original event videos were large `.mov` files that created slow page loads.
-
-The media was converted and optimized into significantly smaller `.mp4` files for web delivery.
-
-The gallery only creates the active video element when the user selects it, reducing unnecessary network usage and improving page performance.
+```text
+Previous / Next navigation
+Media counter
+Navigation indicators
+Image lazy loading
+Video metadata preloading
+Responsive media sizing
+```
 
 ---
 
-## Scroll & UI Animation
+## Video Performance Optimization
 
-The website uses the browser's `IntersectionObserver` API to trigger animations as content enters the viewport.
+The original event videos were approximately **20+ MB `.mov` files** recorded at very high frame rates.
 
-Sections smoothly transition into view rather than loading as a static stack of content.
+For production use, optimized `.mp4` versions were created to significantly reduce download size.
 
-Additional interface animation includes:
+The application also uses:
 
-* Hero image floating animation
-* Animated gold text
-* Moving event ticker
-* Floating casino suits
-* Button shine effects
-* Pricing card hover states
-* Navigation underline animations
-* Gallery transitions
+```html
+preload="metadata"
+```
 
-Reduced-motion accessibility settings are also respected.
+instead of eagerly downloading full video files when the page loads.
+
+Only the currently selected video is mounted in the media viewer.
+
+This reduces unnecessary bandwidth usage and improves page-loading performance.
 
 ---
 
 ## Branding
 
-Bosco Blackjack uses a custom visual identity built around a simple:
+Bosco Blackjack uses a custom minimalist brand mark based around:
 
-**BB + Spade**
+**BB + ♠**
 
-monogram.
+The logo combines modern styling with traditional blackjack imagery.
 
-The branding appears throughout the website and is also used as the browser favicon.
+The branding is used for:
 
-The final favicon was intentionally simplified so that the mark remains recognizable at very small browser-tab sizes.
+* Browser favicon
+* Website navigation
+* Footer identity
+* GitHub project documentation
+
+The favicon was intentionally simplified so that it remains recognizable at very small browser-tab sizes.
 
 ---
 
 ## Technology Stack
 
-| Technology         | Purpose                                  |
-| ------------------ | ---------------------------------------- |
-| React              | Frontend application                     |
-| Vite               | Development and production build tooling |
-| JavaScript         | Application logic                        |
-| CSS3               | Responsive design and animations         |
-| Firebase Firestore | Booking database                         |
-| Firebase Hosting   | Production hosting                       |
-| Firebase Functions | Serverless backend infrastructure        |
-| Git                | Version control                          |
-| GitHub             | Source-code hosting                      |
-| Namecheap          | Domain registration and DNS management   |
+| Technology               | Purpose                                 |
+| ------------------------ | --------------------------------------- |
+| React                    | Frontend application                    |
+| Vite                     | Development and production build system |
+| JavaScript               | Application and booking logic           |
+| CSS3                     | Responsive UI and custom animation      |
+| Firebase Firestore       | Booking database                        |
+| Firebase Cloud Functions | Serverless booking automation           |
+| Firebase Secret Manager  | Secure API-key storage                  |
+| Firebase Hosting         | Production web hosting                  |
+| Resend                   | Transactional booking email delivery    |
+| Namecheap                | Domain registration and DNS             |
+| Git                      | Version control                         |
+| GitHub                   | Repository hosting                      |
+
+---
+
+## System Architecture
+
+```text
+                        ┌─────────────────────┐
+                        │      Customer       │
+                        └──────────┬──────────┘
+                                   │
+                                   ▼
+                        ┌─────────────────────┐
+                        │ boscoblackjack.com  │
+                        │     React / Vite    │
+                        └──────────┬──────────┘
+                                   │
+                              Booking Form
+                                   │
+                                   ▼
+                        ┌─────────────────────┐
+                        │ Firebase Firestore  │
+                        │  bookingRequests    │
+                        └──────────┬──────────┘
+                                   │
+                         Document Created Event
+                                   │
+                                   ▼
+                        ┌─────────────────────┐
+                        │ Firebase Function   │
+                        │ sendBookingEmail    │
+                        └──────────┬──────────┘
+                                   │
+                        Secure RESEND_API_KEY
+                                   │
+                                   ▼
+                        ┌─────────────────────┐
+                        │       Resend        │
+                        └──────────┬──────────┘
+                                   │
+                                   ▼
+                        ┌─────────────────────┐
+                        │   Business Gmail    │
+                        └─────────────────────┘
+```
 
 ---
 
@@ -234,8 +420,13 @@ The final favicon was intentionally simplified so that the mark remains recogniz
 ```text
 blackjack-booking/
 │
+├── functions/
+│   ├── index.js
+│   ├── package.json
+│   └── package-lock.json
+│
 ├── public/
-│   ├── favicon assets
+│   ├── favicon2.png
 │   ├── event photos
 │   └── optimized event videos
 │
@@ -246,14 +437,11 @@ blackjack-booking/
 │   ├── index.css
 │   └── main.jsx
 │
-├── functions/
-│   ├── index.js
-│   └── package.json
-│
-├── firebase.json
 ├── .firebaserc
+├── firebase.json
 ├── index.html
 ├── package.json
+├── package-lock.json
 ├── vite.config.js
 └── README.md
 ```
@@ -262,19 +450,19 @@ blackjack-booking/
 
 ## Local Development
 
-Install dependencies:
+Clone the repository and install frontend dependencies:
 
 ```bash
 npm install
 ```
 
-Start the development server:
+Start the Vite development server:
 
 ```bash
 npm run dev
 ```
 
-The development environment can also be run explicitly on localhost:
+The application can also be started explicitly on localhost:
 
 ```bash
 npm run dev -- --host 127.0.0.1 --port 3000 --strictPort
@@ -284,13 +472,13 @@ npm run dev -- --host 127.0.0.1 --port 3000 --strictPort
 
 ## Production Build
 
-Create the optimized Vite production build:
+Create an optimized Vite production build:
 
 ```bash
 npm run build
 ```
 
-Vite generates the production application inside:
+Production assets are generated inside:
 
 ```text
 dist/
@@ -298,131 +486,164 @@ dist/
 
 ---
 
-## Deployment
+## Firebase Hosting Deployment
 
-Deploy the production site through Firebase Hosting:
+Deploy only the website:
 
 ```bash
 firebase deploy --only hosting
 ```
 
-The deployment is automatically served through both Firebase Hosting and the connected custom domain.
-
----
-
-## Version Control Workflow
-
-Changes are tracked with Git and pushed to GitHub.
-
-Typical production workflow:
-
-```bash
-git status
-
-git add .
-
-git commit -m "Describe production update"
-
-git push
-```
-
-This keeps the deployed client website and public source repository synchronized.
-
----
-
-## Email Notification Infrastructure
-
-Firebase Cloud Functions infrastructure has been initialized for a planned automated booking-notification system.
-
-The intended architecture is:
+The project is available through both:
 
 ```text
-Customer Booking
-      ↓
-Firestore
-      ↓
-Firebase Cloud Function
-      ↓
-Email Service
-      ↓
-Bosco Booking Inbox
+https://bosco-blackjack.web.app
+https://boscoblackjack.com
 ```
 
-Once finalized, the business owner will automatically receive an email containing the booking customer's:
+The custom domain is the primary public-facing URL.
 
-* Name
-* Phone number
-* Email
-* Event date
-* Hours requested
-* Event location
-* Additional details
+---
 
-The email notification layer is being implemented server-side so private email-service credentials are never exposed inside the React frontend.
+## Firebase Functions
+
+Function dependencies are managed independently inside:
+
+```text
+functions/
+```
+
+Install function dependencies:
+
+```bash
+cd functions
+npm install
+```
+
+Deploy the serverless backend:
+
+```bash
+cd ..
+firebase deploy --only functions
+```
+
+The production booking function runs using **Node.js 22** in Firebase's second-generation Functions environment.
+
+---
+
+## Custom Domain Deployment
+
+The production domain:
+
+```text
+boscoblackjack.com
+```
+
+was configured through Namecheap and Firebase Hosting.
+
+Deployment configuration included:
+
+* DNS management
+* Firebase A records
+* Domain ownership verification
+* TXT verification
+* ACME verification
+* SSL certificate provisioning
+* HTTPS hosting
+* Resend DKIM/SPF configuration
 
 ---
 
 ## Development Process
 
-The project was developed iteratively from a simple booking landing page into a complete production business website.
+The project evolved through several production stages:
 
-Major development stages included:
-
-1. React/Vite project initialization
-2. Responsive landing-page design
-3. Firebase project configuration
-4. Firestore booking integration
-5. Firebase Hosting deployment
-6. Git/GitHub repository setup
-7. Real client pricing and contact information integration
-8. Real event photo/video integration
-9. Media optimization
-10. Custom media carousel
-11. Custom domain configuration
-12. HTTPS and SSL provisioning
-13. Custom branding and favicon
-14. Full desktop/mobile visual redesign
-15. Scroll and interaction animations
-16. Firebase Functions backend preparation
+```text
+React/Vite initialization
+        ↓
+Initial business landing page
+        ↓
+Responsive design
+        ↓
+Firebase project configuration
+        ↓
+Firestore booking form
+        ↓
+Firebase Hosting deployment
+        ↓
+GitHub repository
+        ↓
+Custom domain configuration
+        ↓
+HTTPS / SSL setup
+        ↓
+Real event media integration
+        ↓
+Media optimization
+        ↓
+Custom React carousel
+        ↓
+Modern desktop/mobile redesign
+        ↓
+Scroll animations
+        ↓
+Final brand identity + favicon
+        ↓
+Firestore security rules
+        ↓
+Firebase Functions backend
+        ↓
+Firebase Secret Manager
+        ↓
+Resend domain authentication
+        ↓
+Automated booking notification system
+```
 
 ---
 
 ## What This Project Demonstrates
 
-Bosco Blackjack demonstrates practical experience with:
+This project demonstrates hands-on experience with:
 
 * Production React development
-* Responsive web design
-* Client-focused UI/UX
-* Form state management
-* Cloud database integration
-* Serverless architecture
-* Firebase deployment
+* Responsive UI/UX engineering
+* JavaScript state management
+* Cloud-hosted NoSQL databases
+* Firestore security rules
+* Event-driven serverless architecture
+* Cloud Functions
+* Secure secret management
+* Transactional email systems
 * DNS configuration
+* DKIM/SPF authentication
 * Custom-domain deployment
-* SSL/HTTPS provisioning
+* HTTPS/SSL provisioning
 * Media optimization
-* Web performance considerations
+* Performance-aware frontend design
 * Git/GitHub workflows
-* Real-world client requirements
+* Real client requirements
+* Production troubleshooting
 
-Unlike a tutorial or classroom project, Bosco Blackjack was designed, deployed, and maintained for an actual business with real users and real booking requests.
+Unlike a tutorial application, **Bosco Blackjack was designed and deployed for a real business with a real production domain and customer booking workflow.**
 
 ---
 
-## Future Improvements
+## Potential Future Improvements
 
-Potential future additions include:
+Future expansion could include:
 
-* Automated booking email notifications
-* Customer confirmation emails
-* Spam protection
-* Booking-management dashboard
-* Calendar availability
-* Google Analytics
-* Search-engine optimization
+* Automatic customer confirmation emails
+* Booking management dashboard
+* Google Calendar integration
+* Availability management
 * Customer testimonials
-* Online event deposits or payments
+* Google Analytics
+* Advanced SEO
+* Spam/bot protection
+* Online event deposits
+* Stripe payment processing
+* SMS booking notifications
 
 ---
 
@@ -435,3 +656,13 @@ California State University, Fullerton
 
 GitHub:
 https://github.com/ChristianBarajas
+
+---
+
+<p align="center">
+  <img src="./public/favicon2.png" alt="Bosco Blackjack" width="75" />
+</p>
+
+<p align="center">
+  <strong>Built for a real business. Designed for real bookings.</strong>
+</p>
