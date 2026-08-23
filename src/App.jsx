@@ -644,6 +644,33 @@ function App() {
         </Reveal>
       </section>
 
+      <section className="localSection">
+        <Reveal>
+          <div className="localCard">
+            <p className="sectionEyebrow">BASED IN BELLFLOWER, CALIFORNIA</p>
+
+            <h2>
+              Based in Bellflower.
+              <span> Bringing the casino to you.</span>
+            </h2>
+
+            <p>
+              Bosco Blackjack is based out of Bellflower, CA and proudly serves
+              Los Angeles County, Orange County, and surrounding areas. From
+              backyard parties to private events, we bring the tables, chips,
+              cards, shufflers, and dealers straight to your event.
+            </p>
+
+            <div className="localTags">
+              <span>Bellflower, CA</span>
+              <span>Los Angeles County</span>
+              <span>Orange County</span>
+              <span>We Travel To You</span>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
       <section className="contactSection">
         <Reveal>
           <p>QUESTIONS BEFORE BOOKING?</p>
