@@ -93,6 +93,13 @@ function App() {
     }));
   }
 
+  function selectPackage(packageValue) {
+    setFormData((previous) => ({
+      ...previous,
+      hours: packageValue,
+    }));
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     setStatus("Submitting...");
@@ -159,9 +166,9 @@ function App() {
             </h1>
 
             <p className="heroText">
-              Bosco Blackjack brings a professional dealer, blackjack table,
-              chips, cards, and the full casino experience directly to your
-              event.
+              Bring the blackjack experience directly to your event with a
+              professional table setup, casino chips, cards, card shuffler,
+              and optional professional dealer.
             </p>
 
             <div className="heroButtons">
@@ -171,7 +178,7 @@ function App() {
               </a>
 
               <a href="#rates" className="secondaryButton">
-                View Rates
+                View Packages
               </a>
             </div>
 
@@ -183,12 +190,12 @@ function App() {
 
               <div>
                 <strong>♦</strong>
-                <span>Professional Dealer</span>
+                <span>Dealer Available</span>
               </div>
 
               <div>
                 <strong>♣</strong>
-                <span>Full Setup</span>
+                <span>Full Setup Included</span>
               </div>
             </div>
           </div>
@@ -233,10 +240,12 @@ function App() {
         <Reveal>
           <div className="sectionHeading">
             <p className="sectionEyebrow">THE EXPERIENCE</p>
+
             <h2>Everything you need for the table.</h2>
+
             <p>
-              Bosco arrives ready to turn your event into a private blackjack
-              night.
+              Every rental comes ready for blackjack night with the equipment
+              you need to get the game going.
             </p>
           </div>
         </Reveal>
@@ -245,11 +254,14 @@ function App() {
           <Reveal>
             <article className="featureCard">
               <span className="featureNumber">01</span>
+
               <div className="featureIcon">♠</div>
+
               <h3>Blackjack Table</h3>
+
               <p>
-                A dedicated table setup that brings the casino experience
-                directly to your event.
+                A dedicated blackjack table setup that brings the casino
+                experience directly to your party or event.
               </p>
             </article>
           </Reveal>
@@ -257,11 +269,14 @@ function App() {
           <Reveal>
             <article className="featureCard">
               <span className="featureNumber">02</span>
+
               <div className="featureIcon redSuit">♦</div>
+
               <h3>Professional Dealer</h3>
+
               <p>
-                Professional presentation with an experienced dealer running
-                the game throughout your event.
+                Choose our full-service package and have a professional dealer
+                run the table throughout your event.
               </p>
             </article>
           </Reveal>
@@ -269,11 +284,14 @@ function App() {
           <Reveal>
             <article className="featureCard">
               <span className="featureNumber">03</span>
+
               <div className="featureIcon">♣</div>
-              <h3>Chips & Cards</h3>
+
+              <h3>Chips, Cards & Shuffler</h3>
+
               <p>
-                Everything required to play is included and ready when your
-                guests arrive.
+                Casino chips, playing cards, and a card shuffler are included
+                with every table rental.
               </p>
             </article>
           </Reveal>
@@ -281,11 +299,14 @@ function App() {
           <Reveal>
             <article className="featureCard">
               <span className="featureNumber">04</span>
+
               <div className="featureIcon redSuit">♥</div>
+
               <h3>Setup & Breakdown</h3>
+
               <p>
-                Bosco handles setup and breakdown so you can focus on your
-                guests.
+                Bosco handles the table setup and breakdown so you can focus
+                on your guests and enjoy the event.
               </p>
             </article>
           </Reveal>
@@ -296,54 +317,95 @@ function App() {
         <Reveal>
           <div className="sectionHeading">
             <p className="sectionEyebrow">EVENT PACKAGES</p>
-            <h2>Simple pricing. No guessing.</h2>
+
+            <h2>Choose your setup.</h2>
+
+            <p>
+              Rent the complete blackjack table setup or add a professional
+              dealer to run the game.
+            </p>
           </div>
         </Reveal>
 
         <div className="pricingGrid">
           <Reveal>
             <article className="priceCard">
-              <p className="priceLabel">Essential</p>
-              <h3>2 Hours</h3>
+              <p className="priceLabel">TABLE RENTAL</p>
+
+              <h3>3–4 Hours · No Dealer</h3>
+
               <div className="price">$185</div>
+
               <p>
-                Perfect for birthdays, smaller private events, and shorter
-                casino nights.
+                Includes the blackjack table, casino chips, playing cards,
+                card shuffler, setup, and breakdown.
               </p>
-              <a href="#booking">Request 2 Hours →</a>
+
+              <a
+                href="#booking"
+                onClick={() =>
+                  selectPackage("3-4 Hours - Table Rental - No Dealer")
+                }
+              >
+                Request Table Rental →
+              </a>
             </article>
           </Reveal>
 
           <Reveal className="featuredPriceWrap">
             <article className="priceCard featuredPrice">
-              <div className="popularBadge">POPULAR</div>
-              <p className="priceLabel">Full Night</p>
-              <h3>3 Hours</h3>
-              <div className="price">$235</div>
+              <div className="popularBadge">FULL SERVICE</div>
+
+              <p className="priceLabel">TABLE + DEALER</p>
+
+              <h3>3–4 Hours · Dealer Included</h3>
+
+              <div className="price">$240</div>
+
               <p>
-                More time for guests to rotate through the table and enjoy the
-                experience.
+                Includes the blackjack table, professional dealer, casino
+                chips, playing cards, card shuffler, setup, and breakdown.
               </p>
-              <a href="#booking">Request 3 Hours →</a>
+
+              <a
+                href="#booking"
+                onClick={() =>
+                  selectPackage("3-4 Hours - Table + Professional Dealer")
+                }
+              >
+                Request Full Service →
+              </a>
             </article>
           </Reveal>
 
           <Reveal>
             <article className="priceCard">
-              <p className="priceLabel">Keep Playing</p>
-              <h3>Additional Hour</h3>
-              <div className="price">$60<span>+</span></div>
+              <p className="priceLabel">EXTENDED RENTAL</p>
+
+              <h3>8 Hours · No Dealer</h3>
+
+              <div className="price">$220</div>
+
               <p>
-                Extend the event when the table is still hot and your guests
-                aren't ready to stop.
+                Keep the table for up to 8 hours. Includes casino chips,
+                playing cards, card shuffler, setup, and breakdown.
               </p>
-              <a href="#booking">Request Custom Time →</a>
+
+              <a
+                href="#booking"
+                onClick={() =>
+                  selectPackage("8 Hours - Extended Table Rental - No Dealer")
+                }
+              >
+                Request Extended Rental →
+              </a>
             </article>
           </Reveal>
         </div>
 
         <p className="transportNote">
-          Transportation fee varies depending on event location.
+          All packages include chips, cards, and a card shuffler.
+          Transportation fee may vary depending on event location.
         </p>
       </section>
 
@@ -351,7 +413,9 @@ function App() {
         <Reveal>
           <div className="sectionHeading leftHeading">
             <p className="sectionEyebrow">RECENT EVENTS</p>
+
             <h2>See Bosco in action.</h2>
+
             <p>
               Actual setups, actual events, and the experience your guests can
               expect.
@@ -401,7 +465,9 @@ function App() {
               </button>
 
               <div className="mediaLabel">
-                {currentMedia.type === "video" ? "WATCH EVENT" : "EVENT PHOTO"}
+                {currentMedia.type === "video"
+                  ? "WATCH EVENT"
+                  : "EVENT PHOTO"}
               </div>
             </div>
 
@@ -449,21 +515,23 @@ function App() {
 
               <p>
                 Send the event details below. Bosco will follow up to confirm
-                availability, timing, and transportation.
+                availability, your selected package, and transportation.
               </p>
 
               <div className="bookingDetails">
                 <div>
                   <span>01</span>
-                  Submit your event details
+                  Choose your table package
                 </div>
+
                 <div>
                   <span>02</span>
-                  Bosco confirms availability
+                  Submit your event details
                 </div>
+
                 <div>
                   <span>03</span>
-                  Casino night is locked in
+                  Bosco confirms availability
                 </div>
               </div>
             </div>
@@ -520,18 +588,26 @@ function App() {
 
               <div className="formRow">
                 <label>
-                  Hours Needed
+                  Package
                   <select
                     name="hours"
                     value={formData.hours}
                     onChange={handleChange}
                     required
                   >
-                    <option value="">Select hours</option>
-                    <option value="2 Hours">2 Hours</option>
-                    <option value="3 Hours">3 Hours</option>
-                    <option value="4 Hours">4 Hours</option>
-                    <option value="5+ Hours">5+ Hours</option>
+                    <option value="">Select package</option>
+
+                    <option value="3-4 Hours - Table Rental - No Dealer">
+                      $185 — 3–4 Hours — No Dealer
+                    </option>
+
+                    <option value="3-4 Hours - Table + Professional Dealer">
+                      $240 — 3–4 Hours — With Dealer
+                    </option>
+
+                    <option value="8 Hours - Extended Table Rental - No Dealer">
+                      $220 — 8 Hours — No Dealer
+                    </option>
                   </select>
                 </label>
 
@@ -571,7 +647,9 @@ function App() {
       <section className="contactSection">
         <Reveal>
           <p>QUESTIONS BEFORE BOOKING?</p>
+
           <h2>Talk directly with Bosco.</h2>
+
           <a href="mailto:fatcat5167@gmail.com">
             fatcat5167@gmail.com
             <span>↗</span>
@@ -582,6 +660,7 @@ function App() {
       <footer>
         <div className="footerBrand">
           <span className="brandMark">BB</span>
+
           <div>
             <strong>Bosco Blackjack</strong>
             <p>Private casino experiences in Southern California.</p>
