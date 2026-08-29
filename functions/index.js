@@ -47,7 +47,7 @@ exports.sendBookingEmail = onDocumentCreated(
 
     const { data, error } = await resend.emails.send({
       from: "Bosco Blackjack <bookings@mail.boscoblackjack.com>",
-      to: ["fatcat5167@gmail.com"],
+      to: ["boscoblackjack@gmail.com"],
       replyTo: booking.email,
       subject: `New Bosco Blackjack Booking - ${booking.name || "New Customer"}`,
 

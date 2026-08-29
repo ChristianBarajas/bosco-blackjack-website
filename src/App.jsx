@@ -254,9 +254,7 @@ function App() {
           <Reveal>
             <article className="featureCard">
               <span className="featureNumber">01</span>
-
               <div className="featureIcon">♠</div>
-
               <h3>Blackjack Table</h3>
 
               <p>
@@ -269,9 +267,7 @@ function App() {
           <Reveal>
             <article className="featureCard">
               <span className="featureNumber">02</span>
-
               <div className="featureIcon redSuit">♦</div>
-
               <h3>Professional Dealer</h3>
 
               <p>
@@ -284,9 +280,7 @@ function App() {
           <Reveal>
             <article className="featureCard">
               <span className="featureNumber">03</span>
-
               <div className="featureIcon">♣</div>
-
               <h3>Chips, Cards & Shuffler</h3>
 
               <p>
@@ -299,9 +293,7 @@ function App() {
           <Reveal>
             <article className="featureCard">
               <span className="featureNumber">04</span>
-
               <div className="featureIcon redSuit">♥</div>
-
               <h3>Setup & Breakdown</h3>
 
               <p>
@@ -398,6 +390,33 @@ function App() {
                 }
               >
                 Request Extended Rental →
+              </a>
+            </article>
+          </Reveal>
+
+          <Reveal>
+            <article className="priceCard">
+              <p className="priceLabel">DOUBLE TABLE PACKAGE</p>
+
+              <h3>3–4 Hours · 2 Tables + 2 Dealers</h3>
+
+              <div className="price">$600</div>
+
+              <p>
+                Includes two blackjack tables, two professional dealers,
+                casino chips, playing cards, card shufflers, setup, and
+                breakdown.
+              </p>
+
+              <a
+                href="#booking"
+                onClick={() =>
+                  selectPackage(
+                    "3-4 Hours - 2 Tables + 2 Professional Dealers"
+                  )
+                }
+              >
+                Request Double Table Package →
               </a>
             </article>
           </Reveal>
@@ -608,6 +627,10 @@ function App() {
                     <option value="8 Hours - Extended Table Rental - No Dealer">
                       $220 — 8 Hours — No Dealer
                     </option>
+
+                    <option value="3-4 Hours - 2 Tables + 2 Professional Dealers">
+                      $600 — 3–4 Hours — 2 Tables + 2 Dealers
+                    </option>
                   </select>
                 </label>
 
@@ -677,8 +700,8 @@ function App() {
 
           <h2>Talk directly with Bosco.</h2>
 
-          <a href="mailto:fatcat5167@gmail.com">
-            fatcat5167@gmail.com
+          <a href="mailto:boscoblackjack@gmail.com">
+            boscoblackjack@gmail.com
             <span>↗</span>
           </a>
         </Reveal>
