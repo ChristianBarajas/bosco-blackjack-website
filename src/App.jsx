@@ -39,6 +39,8 @@ function App() {
     phone: "",
     email: "",
     eventDate: "",
+    eventStartTime: "",
+    setupTime: "",
     hours: "",
     location: "",
     notes: "",
@@ -118,6 +120,8 @@ function App() {
         phone: "",
         email: "",
         eventDate: "",
+    eventStartTime: "",
+    setupTime: "",
         hours: "",
         location: "",
         notes: "",
@@ -600,6 +604,30 @@ function App() {
                     value={formData.eventDate}
                     onChange={handleChange}
                     type="date"
+                    required
+                  />
+                </label>
+              </div>
+
+              <div className="formRow">
+                <label>
+                  Party Start Time
+                  <input
+                    name="eventStartTime"
+                    type="time"
+                    value={formData.eventStartTime}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+
+                <label>
+                  Preferred Setup Time
+                  <input
+                    name="setupTime"
+                    type="time"
+                    value={formData.setupTime}
+                    onChange={handleChange}
                     required
                   />
                 </label>
