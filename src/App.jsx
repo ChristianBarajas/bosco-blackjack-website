@@ -40,7 +40,6 @@ function App() {
     email: "",
     eventDate: "",
     eventStartTime: "",
-    setupTime: "",
     hours: "",
     location: "",
     notes: "",
@@ -121,7 +120,6 @@ function App() {
         email: "",
         eventDate: "",
     eventStartTime: "",
-    setupTime: "",
         hours: "",
         location: "",
         notes: "",
@@ -301,8 +299,8 @@ function App() {
               <h3>Setup & Breakdown</h3>
 
               <p>
-                Bosco handles the table setup and breakdown so you can focus
-                on your guests and enjoy the event.
+                Setup typically takes approximately 5 minutes. Bosco handles
+                setup and breakdown so you can enjoy your event.
               </p>
             </article>
           </Reveal>
@@ -621,16 +619,11 @@ function App() {
                   />
                 </label>
 
-                <label>
-                  Preferred Setup Time
-                  <input
-                    name="setupTime"
-                    type="time"
-                    value={formData.setupTime}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
+                <div className="setupInfo" role="note" style={{ alignSelf: "center", color: "#c7cfbf", fontSize: "0.9rem", lineHeight: 1.6 }}>
+                  <strong style={{ color: "#e6ca81" }}>Quick setup included.</strong>{" "}
+                  Our blackjack tables typically take about 5 minutes to set up.
+                  Bosco will coordinate arrival details before your event.
+                </div>
               </div>
 
               <div className="formRow">
