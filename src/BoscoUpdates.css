@@ -1,0 +1,215 @@
+/* Bosco Blackjack: gallery and social improvements. Existing styles are preserved. */
+.gallerySection .mediaViewer { background: #0b100c; overflow: hidden; }
+.gallerySection .mediaViewer .boscoGalleryMedia {
+  object-fit: contain;
+  object-position: center;
+  background: #0b100c;
+}
+.boscoGalleryFooter { margin-top: 18px; width: 100%; }
+.boscoGalleryHint {
+  margin: 0 0 11px; font-size: 10px; letter-spacing: .21em;
+  font-weight: 750; color: #c5a86b;
+}
+.boscoThumbs {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px; width: 100%;
+}
+.boscoThumb {
+  position: relative; height: 70px; overflow: hidden; cursor: pointer;
+  border-radius: 9px; border: 1px solid rgba(219,189,112,.25);
+  background: #172119; padding: 0; transition: border-color .2s ease, transform .2s ease;
+}
+.boscoThumb:hover { transform: translateY(-2px); border-color: #d3b675; }
+.boscoThumbActive { border: 2px solid #d3b675; }
+.boscoThumb img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.boscoVideoTile { display: grid; place-items: center; height: 100%; color: #d3b675; font-size: 21px; }
+.boscoPlayBadge {
+  position: absolute; left: 6px; bottom: 6px; display: grid;
+  place-items: center; width: 23px; height: 23px; border-radius: 50%;
+  background: rgba(10,15,12,.86); color: #efd897; font-size: 10px;
+}
+.boscoSocialSection {
+  background: #101712; padding: 84px 24px;
+  border-top: 1px solid rgba(213,181,103,.16);
+  border-bottom: 1px solid rgba(213,181,103,.16);
+}
+.boscoSocialContainer { max-width: 1160px; margin: 0 auto; }
+.boscoSocialContainer h2 { color: #f5eee1; font-size: clamp(34px, 4.5vw, 54px); margin: 12px 0; }
+.boscoSocialIntro { color: #b7c1b6; margin: 0 0 32px; line-height: 1.8; max-width: 620px; }
+.boscoSocialGrid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+.boscoSocialCard {
+  display: flex; align-items: center; gap: 15px; min-width: 0;
+  padding: 22px 20px; border: 1px solid rgba(213,181,103,.25);
+  background: linear-gradient(145deg, #1b271e, #151f17);
+  border-radius: 14px; text-decoration: none; transition: transform .2s, border-color .2s;
+}
+.boscoSocialCard:hover { transform: translateY(-3px); border-color: #d3b675; }
+.boscoSocialCard:focus-visible, .boscoThumb:focus-visible { outline: 2px solid #f4d994; outline-offset: 3px; }
+.boscoSocialSymbol {
+  flex: 0 0 46px; display: grid; place-items: center; width: 46px; height: 46px;
+  border: 1px solid rgba(213,181,103,.35); border-radius: 12px;
+  color: #e7c87b; font-size: 26px; font-family: Arial, sans-serif; font-weight: 700;
+}
+.boscoSocialText { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.boscoSocialText strong { color: #f7f1e7; font-size: 17px; }
+.boscoSocialText small { color: #aab9aa; font-size: 12px; overflow-wrap: anywhere; }
+.boscoSocialArrow { margin-left: auto; align-self: flex-start; color: #e7c87b; font-size: 20px; }
+@media (max-width: 860px) {
+  .boscoSocialGrid { grid-template-columns: 1fr; }
+  .boscoSocialSection { padding: 60px 20px; }
+}
+@media (max-width: 600px) {
+  .boscoThumbs { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .boscoThumb { height: 60px; }
+  .boscoSocialCard { padding: 18px; }
+}
+
+/* Client contact: direct access to the two event hosts. */
+.boscoContactSection { padding: 84px 24px; }
+.boscoContactSection .boscoContactInner { width: 100%; max-width: 940px; margin: 0 auto; text-align: center; }
+.boscoContactSection .boscoContactInner > h2 { margin: 10px 0 12px; }
+.boscoContactSection .boscoContactIntro {
+  max-width: 650px; margin: 0 auto 32px;
+  color: #bfcabf; font-size: 15px; line-height: 1.85;
+}
+.boscoContactGrid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; text-align: left; }
+.boscoContactCard {
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding: 28px; border: 1px solid rgba(214,181,105,.28);
+  background: linear-gradient(145deg,#202f24,#141e17);
+  border-radius: 15px;
+}
+.boscoContactIcon { color: #e5c87e; font-size: 27px; line-height: 1; }
+.boscoContactCard h3 { margin: 16px 0 4px; font-size: 25px; color: #f7f2e8; }
+.boscoContactCard p { color: #b8c5b9; font-size: 13px; margin: 0 0 20px; }
+.boscoContactSection .boscoContactNumber {
+  color: #edcd83; text-decoration: none; font-size: clamp(18px,2.4vw,23px);
+  font-weight: 750; overflow-wrap: anywhere;
+}
+.boscoContactSection .boscoCallButton {
+  display: flex; align-items: center; justify-content: space-between; gap: 15px;
+  width: 100%; box-sizing: border-box; margin-top: 23px;
+  border-radius: 9px; padding: 13px 17px; background: #d7b96e;
+  color: #182118; font-size: 14px; font-weight: 800; text-decoration: none;
+  transition: background .2s ease, transform .2s ease;
+}
+.boscoContactSection .boscoCallButton:hover { background: #edd28c; transform: translateY(-2px); }
+.boscoContactSection .boscoCallButton:focus-visible,
+.boscoContactSection .boscoContactNumber:focus-visible,
+.boscoContactSection .boscoContactEmail a:focus-visible { outline: 2px solid #efd28c; outline-offset: 4px; }
+.boscoContactEmail { margin: 30px auto 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.boscoContactEmail > span { color: #b9c6bb; font-size: 13px; }
+.boscoContactSection .boscoContactEmail a { color: #e8cb8b; font-size: clamp(16px,2.4vw,22px); text-decoration: none; overflow-wrap: anywhere; }
+@media (max-width: 650px) {
+  .boscoContactSection { padding: 60px 20px; }
+  .boscoContactGrid { grid-template-columns: 1fr; }
+  .boscoContactCard { padding: 23px; }
+}
+
+
+
+/* Refined showcase: full-width stage with an elegant bottom thumbnail rail.
+   This deliberately avoids the inherited .galleryLayout/.mediaViewer sizing. */
+.gallerySection .boscoShowcase {
+  width: 100%; max-width: 1240px; min-width: 0; margin: 0 auto;
+  display: block; box-sizing: border-box;
+  border: 1px solid rgba(220, 186, 108, .32);
+  border-radius: 20px; overflow: hidden;
+  background: #141e17; box-shadow: 0 24px 80px rgba(0,0,0,.34);
+}
+.boscoShowcaseStage {
+  width:100%; height: min(59vw, 580px); min-height: 350px; max-height: 580px;
+  background:#101810; position:relative; overflow:hidden;
+  display:flex; justify-content:center; align-items:center; isolation:isolate;
+}
+.boscoShowcaseBackdrop {
+  position:absolute; inset:-36px; z-index:0;
+  background-size:cover; background-position:center;
+  filter:blur(28px) brightness(.37) saturate(.8); transform:scale(1.08);
+}
+.boscoShowcaseShade {
+  position:absolute; inset:0; z-index:1;
+  background:linear-gradient(90deg,rgba(3,9,6,.48),transparent 28%,transparent 72%,rgba(3,9,6,.48));
+}
+.boscoShowcaseMedia {
+  display:block; position:relative; z-index:2;
+  width:100%; height:100%; min-width:0; max-width:100%; max-height:100%;
+  object-fit:contain; object-position:center; background:transparent; border:0; border-radius:0;
+}
+.boscoShowcaseTop, .boscoShowcaseBottom {
+  position:absolute; z-index:4; left:0; right:0;
+  display:flex; justify-content:space-between; gap:12px;
+  color:#f7e5b6; font-size:10px; font-weight:800; letter-spacing:.13em;
+  pointer-events:none; text-shadow:0 2px 10px rgba(0,0,0,.8);
+}
+.boscoShowcaseTop { top:0; align-items:center; padding:18px 24px 38px;
+  background:linear-gradient(180deg,rgba(3,9,6,.72),transparent);
+}
+.boscoShowcaseTop > span:first-child { display:flex; align-items:center; gap:9px; }
+.boscoShowcaseBottom { bottom:0; padding:40px 24px 18px;
+  background:linear-gradient(0deg,rgba(3,9,6,.75),transparent);
+}
+.boscoCinemaPulse { display:inline-block; width:7px; height:7px; border-radius:50%; background:#dec17b; box-shadow:0 0 12px #dec17b; }
+.boscoShowcaseArrow {
+  position:absolute; top:50%; transform:translateY(-50%); z-index:5;
+  width:44px; height:44px; display:grid; place-items:center;
+  border:1px solid rgba(245,228,184,.54); border-radius:50%;
+  background:rgba(12,20,14,.82); color:#f8e6b7; font-size:29px;
+  cursor:pointer; transition:background .2s,transform .2s;
+}
+.boscoShowcaseArrow:hover { background:#2c3e2e; transform:translateY(-50%) scale(1.05); }
+.boscoShowcasePrev { left:17px; } .boscoShowcaseNext { right:17px; }
+.boscoShowcaseFooter {
+  padding:26px 30px 30px; display:grid;
+  grid-template-columns:minmax(215px,.8fr) minmax(0,1.8fr);
+  align-items:center; gap:28px;
+  background:linear-gradient(125deg,#1d2c21,#121d15);
+  border-top:1px solid rgba(220,186,108,.22);
+}
+.boscoShowcaseFooterCopy { min-width:0; }
+.boscoShowcaseEyebrow { color:#d9bc78; font-size:10px; font-weight:800; letter-spacing:.18em; }
+.boscoShowcaseFooterCopy h3 { color:#fff9ee; margin:10px 0 7px; font-size:clamp(19px,2vw,25px); line-height:1.25; }
+.boscoShowcaseFooterCopy p { color:#b8c5b9; font-size:12px; line-height:1.6; margin:0; }
+.boscoShowcaseThumbs { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; min-width:0; }
+.boscoShowcaseThumb {
+  position:relative; min-width:0; aspect-ratio:4 / 3; overflow:hidden;
+  border:2px solid rgba(222,195,128,.24); border-radius:9px;
+  background:#0b140e; padding:0; cursor:pointer; transition:border-color .2s,transform .2s;
+}
+.boscoShowcaseThumb:hover { border-color:#e9c983; transform:translateY(-3px); }
+.boscoShowcaseThumb.isActive { border-color:#f1d18b; box-shadow:0 0 0 1px rgba(241,209,139,.5); }
+.boscoShowcaseThumb img { width:100%; height:100%; display:block; object-fit:cover; }
+.boscoShowcaseFilmPlaceholder { display:grid; place-items:center; width:100%; height:100%; font-size:28px; color:#ae8950;
+  background:radial-gradient(circle at 50% 50%,#2c412f,#0d160f); }
+.boscoShowcaseThumbIndex { position:absolute; top:5px; right:5px; padding:2px 5px;
+  border-radius:4px; background:rgba(0,0,0,.7); color:#f4ddad; font-size:10px; font-weight:800; }
+.boscoShowcasePlay { position:absolute; left:8px; bottom:7px; display:grid; place-items:center;
+  width:25px;height:25px;border-radius:50%;background:rgba(6,12,8,.86);color:#f4d58f;font-size:10px; }
+.boscoShowcaseThumb:focus-visible,.boscoShowcaseArrow:focus-visible { outline:2px solid #fff1c4; outline-offset:3px; }
+.boscoContactActions { display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; }
+.boscoContactSection .boscoContactActions .boscoCallButton,
+.boscoContactSection .boscoContactActions .boscoTextButton {
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  min-width:0; box-sizing:border-box; width:100%; padding:13px 15px; margin-top:23px;
+  border-radius:9px; font-size:14px; font-weight:800; text-decoration:none;
+}
+.boscoContactSection .boscoContactActions .boscoCallButton { background:#d7b96e;color:#182118; }
+.boscoContactSection .boscoContactActions .boscoTextButton { background:transparent;color:#edd18f;border:1px solid #a68c50; }
+.boscoContactSection .boscoContactActions .boscoTextButton:hover { background:#354431; }
+@media (max-width:900px) {
+  .boscoShowcaseFooter { grid-template-columns:1fr; gap:20px; }
+  .boscoShowcaseThumbs { grid-template-columns:repeat(6,minmax(0,1fr)); }
+}
+@media (max-width:650px) {
+  .gallerySection .boscoShowcase { border-radius:14px; }
+  .boscoShowcaseStage { height:390px; min-height:0; }
+  .boscoShowcaseTop,.boscoShowcaseBottom { font-size:8px; padding-left:15px; padding-right:15px; }
+  .boscoShowcaseBottom span:last-child { display:none; }
+  .boscoShowcaseArrow { width:34px;height:34px;font-size:24px; }
+  .boscoShowcasePrev { left:9px; } .boscoShowcaseNext { right:9px; }
+  .boscoShowcaseFooter { padding:23px 16px; }
+  .boscoShowcaseThumbs { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .boscoShowcaseArrow,.boscoShowcaseThumb { transition:none; }
+}

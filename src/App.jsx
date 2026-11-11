@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "./firebase";
 import "./App.css";
+import "./BoscoUpdates.css";
 
 function Reveal({ children, className = "" }) {
   const ref = useRef(null);
@@ -47,6 +48,34 @@ function App() {
 
   const [status, setStatus] = useState("");
   const [mediaIndex, setMediaIndex] = useState(0);
+  const [galleryVisible, setGalleryVisible] = useState(false);
+  const galleryRef = useRef(null);
+  const activeVideoRef = useRef(null);
+
+  // Only play the selected film while the gallery is actually on-screen.
+  useEffect(() => {
+    const node = galleryRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setGalleryVisible(entry.isIntersecting),
+      { threshold: 0.12 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = activeVideoRef.current;
+    if (!video) return;
+    if (!galleryVisible) {
+      video.pause();
+      return;
+    }
+    video.muted = true;
+    const attempt = video.play();
+    if (attempt && typeof attempt.catch === "function") attempt.catch(() => {});
+    return () => video.pause();
+  }, [mediaIndex, galleryVisible]);
 
   const mediaItems = [
     {
@@ -68,6 +97,17 @@ function App() {
       type: "video",
       src: "/bosco-2.mp4",
       alt: "Bosco Blackjack private event",
+    },
+    {
+      type: "image",
+      src: "/bosco-backyard-event.webp",
+      alt: "Bosco Blackjack table at a backyard party with guests and casino chips",
+    },
+    {
+      type: "video",
+      src: "/bosco-new-event.mp4",
+      poster: "/bosco-new-event-poster.jpg",
+      alt: "Bosco Blackjack event highlights",
     },
   ];
 
@@ -119,7 +159,7 @@ function App() {
         phone: "",
         email: "",
         eventDate: "",
-    eventStartTime: "",
+        eventStartTime: "",
         hours: "",
         location: "",
         notes: "",
@@ -445,77 +485,76 @@ function App() {
         </Reveal>
 
         <Reveal>
-          <div className="galleryLayout">
-            <div className="mediaViewer">
-              <button
-                type="button"
-                className="mediaArrow leftArrow"
-                onClick={showPreviousMedia}
-                aria-label="Previous media"
-              >
-                ‹
-              </button>
-
+          <div className="boscoShowcase" ref={galleryRef}>
+            <div className="boscoShowcaseStage">
+              <div
+                className="boscoShowcaseBackdrop"
+                aria-hidden="true"
+                style={{ backgroundImage: `url(${currentMedia.poster || (currentMedia.type === "video" ? "/bosco-action.jpeg" : currentMedia.src)})` }}
+              />
+              <div className="boscoShowcaseShade" aria-hidden="true" />
+              <div className="boscoShowcaseTop">
+                <span><span className="boscoCinemaPulse" /> REAL EVENTS · BOSCO BLACKJACK</span>
+                <span>0{mediaIndex + 1} / 0{mediaItems.length}</span>
+              </div>
               {currentMedia.type === "image" ? (
                 <img
                   key={currentMedia.src}
-                  className="mediaItem"
+                  className="boscoShowcaseMedia"
                   src={currentMedia.src}
                   alt={currentMedia.alt}
-                  loading="lazy"
+                  decoding="async"
                 />
               ) : (
                 <video
                   key={currentMedia.src}
-                  className="mediaItem"
+                  ref={activeVideoRef}
+                  className="boscoShowcaseMedia"
                   controls
+                  autoPlay
+                  muted
+                  loop
                   preload="metadata"
+                  poster={currentMedia.poster}
                   playsInline
+                  aria-label={currentMedia.alt}
                 >
                   <source src={currentMedia.src} type="video/mp4" />
                 </video>
               )}
-
-              <button
-                type="button"
-                className="mediaArrow rightArrow"
-                onClick={showNextMedia}
-                aria-label="Next media"
-              >
-                ›
-              </button>
-
-              <div className="mediaLabel">
-                {currentMedia.type === "video"
-                  ? "WATCH EVENT"
-                  : "EVENT PHOTO"}
+              <button type="button" className="boscoShowcaseArrow boscoShowcasePrev" onClick={showPreviousMedia} aria-label="Previous event">‹</button>
+              <button type="button" className="boscoShowcaseArrow boscoShowcaseNext" onClick={showNextMedia} aria-label="Next event">›</button>
+              <div className="boscoShowcaseBottom">
+                <span>{currentMedia.type === "video" ? "EVENT FILM · AUTOPLAY" : "EVENT PHOTOGRAPHY"}</span>
+                <span>{currentMedia.type === "video" ? "TAP SOUND TO LISTEN" : "CAPTURED AT A REAL EVENT"}</span>
               </div>
             </div>
-
-            <div className="gallerySide">
-              <div>
-                <span className="galleryCount">
-                  0{mediaIndex + 1}
-                  <small>/ 0{mediaItems.length}</small>
-                </span>
-
-                <h3>Real casino-night energy.</h3>
-
-                <p>
-                  Use the arrows to look through recent Bosco Blackjack events.
-                  Videos only load when selected, helping the site stay fast.
-                </p>
+            <div className="boscoShowcaseFooter">
+              <div className="boscoShowcaseFooterCopy">
+                <span className="boscoShowcaseEyebrow">THE BOSCO COLLECTION</span>
+                <h3>Real nights. Real casino energy.</h3>
+                <p>Explore six moments from our events. Choose any photo or film below.</p>
               </div>
-
-              <div className="galleryDots">
+              <div className="boscoShowcaseThumbs" role="group" aria-label="Choose an event photo or video">
                 {mediaItems.map((item, index) => (
                   <button
                     type="button"
                     key={item.src}
-                    className={index === mediaIndex ? "activeDot" : ""}
+                    className={`boscoShowcaseThumb ${index === mediaIndex ? "isActive" : ""}`}
                     onClick={() => setMediaIndex(index)}
-                    aria-label={`View media ${index + 1}`}
-                  />
+                    aria-label={`Show ${item.alt}`}
+                    aria-pressed={index === mediaIndex}
+                  >
+                    {item.type === "image" ? (
+                      <img src={item.src} alt="" loading="lazy" decoding="async" />
+                    ) : item.poster ? (
+                      <img src={item.poster} alt="" loading="lazy" decoding="async" />
+                    ) : (
+                      <span className="boscoShowcaseFilmPlaceholder">♠</span>
+                    )}
+                    <span className="boscoShowcaseThumbIndex">0{index + 1}</span>
+                    {item.type === "video" && <span className="boscoShowcasePlay" aria-hidden="true">▶</span>}
+                  </button>
                 ))}
               </div>
             </div>
@@ -691,22 +730,22 @@ function App() {
       <section className="localSection">
         <Reveal>
           <div className="localCard">
-            <p className="sectionEyebrow">BASED IN BELLFLOWER, CALIFORNIA</p>
+            <p className="sectionEyebrow">BASED IN FULLERTON, CALIFORNIA</p>
 
             <h2>
-              Based in Bellflower.
+              Based in Fullerton.
               <span> Bringing the casino to you.</span>
             </h2>
 
             <p>
-              Bosco Blackjack is based out of Bellflower, CA and proudly serves
+              Bosco Blackjack is based out of Fullerton, CA and proudly serves
               Los Angeles County, Orange County, and surrounding areas. From
               backyard parties to private events, we bring the tables, chips,
               cards, shufflers, and dealers straight to your event.
             </p>
 
             <div className="localTags">
-              <span>Bellflower, CA</span>
+              <span>Fullerton, CA</span>
               <span>Los Angeles County</span>
               <span>Orange County</span>
               <span>We Travel To You</span>
@@ -715,16 +754,81 @@ function App() {
         </Reveal>
       </section>
 
-      <section className="contactSection">
+      <section className="boscoSocialSection" id="social">
         <Reveal>
-          <p>QUESTIONS BEFORE BOOKING?</p>
+          <div className="boscoSocialContainer">
+            <p className="sectionEyebrow">STAY CONNECTED</p>
+            <h2>Follow the action.</h2>
+            <p className="boscoSocialIntro">
+              See real blackjack nights, behind-the-scenes highlights, and upcoming event updates.
+            </p>
+            <div className="boscoSocialGrid">
+              <a href="https://www.instagram.com/bosco_blackjack/" target="_blank" rel="noopener noreferrer" className="boscoSocialCard">
+                <span className="boscoSocialSymbol" aria-hidden="true">◎</span>
+                <span className="boscoSocialText"><strong>Instagram</strong><small>@bosco_blackjack</small></span>
+                <span aria-hidden="true" className="boscoSocialArrow">↗</span>
+              </a>
+              <a href="https://youtube.com/@boscoblackjack" target="_blank" rel="noopener noreferrer" className="boscoSocialCard">
+                <span className="boscoSocialSymbol" aria-hidden="true">▶</span>
+                <span className="boscoSocialText"><strong>YouTube</strong><small>@boscoblackjack</small></span>
+                <span aria-hidden="true" className="boscoSocialArrow">↗</span>
+              </a>
+              <a href="https://www.facebook.com/marketplace/profile/100043887124337/" target="_blank" rel="noopener noreferrer" className="boscoSocialCard">
+                <span className="boscoSocialSymbol" aria-hidden="true">f</span>
+                <span className="boscoSocialText"><strong>Facebook</strong><small>Marketplace profile</small></span>
+                <span aria-hidden="true" className="boscoSocialArrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </Reveal>
+      </section>
 
-          <h2>Talk directly with Bosco.</h2>
+      <section className="contactSection boscoContactSection" id="contact">
+        <Reveal>
+          <div className="boscoContactInner">
+            <p className="sectionEyebrow">QUESTIONS BEFORE BOOKING?</p>
+            <h2>Let's bring the casino to you.</h2>
+            <p className="boscoContactIntro">
+              Have questions about your event? Speak directly with our team.
+              From your first question to the final hand, our team handles your
+              casino experience personally.
+            </p>
 
-          <a href="mailto:boscoblackjack@gmail.com">
-            boscoblackjack@gmail.com
-            <span>↗</span>
-          </a>
+            <div className="boscoContactGrid">
+              <article className="boscoContactCard">
+                <span className="boscoContactIcon" aria-hidden="true">♠</span>
+                <h3>Damian</h3>
+                <p>Event Host &amp; Dealer</p>
+                <a className="boscoContactNumber" href="tel:+17144738386">
+                  (714) 473-8386
+                </a>
+                <div className="boscoContactActions" aria-label="Call or text Damian">
+                  <a className="boscoCallButton" href="tel:+17144738386">Call <span aria-hidden="true">↗</span></a>
+                  <a className="boscoTextButton" href="sms:+17144738386">Text <span aria-hidden="true">↗</span></a>
+                </div>
+              </article>
+
+              <article className="boscoContactCard">
+                <span className="boscoContactIcon" aria-hidden="true">♣</span>
+                <h3>Fernando</h3>
+                <p>Event Host &amp; Dealer</p>
+                <a className="boscoContactNumber" href="tel:+17147266944">
+                  (714) 726-6944
+                </a>
+                <div className="boscoContactActions" aria-label="Call or text Fernando">
+                  <a className="boscoCallButton" href="tel:+17147266944">Call <span aria-hidden="true">↗</span></a>
+                  <a className="boscoTextButton" href="sms:+17147266944">Text <span aria-hidden="true">↗</span></a>
+                </div>
+              </article>
+            </div>
+
+            <div className="boscoContactEmail">
+              <span>Email us instead</span>
+              <a href="mailto:boscoblackjack@gmail.com">
+                boscoblackjack@gmail.com <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
         </Reveal>
       </section>
 
