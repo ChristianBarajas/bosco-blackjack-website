@@ -394,7 +394,7 @@ function App() {
 
               <h3>3–4 Hours · Dealer Included</h3>
 
-              <div className="price">$240</div>
+              <div className="price">$260</div>
 
               <p>
                 Includes the blackjack table, professional dealer, casino
@@ -681,7 +681,7 @@ function App() {
                     </option>
 
                     <option value="3-4 Hours - Table + Professional Dealer">
-                      $240 — 3–4 Hours — With Dealer
+                      $260 — 3–4 Hours — With Dealer
                     </option>
 
                     <option value="8 Hours - Extended Table Rental - No Dealer">
